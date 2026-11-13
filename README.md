@@ -55,6 +55,8 @@ On Linux a udev rule granting access to device `05ac:024f` is needed.
 Running `g87ctl` without arguments prints a one screen overview of every
 command, option and effect.
 
+![g87ctl help screen](docs/images/help.png)
+
 ```
 g87ctl info                               # device information
 g87ctl modes                              # effects and their stored settings
@@ -81,6 +83,12 @@ and their settings. Edits show up in the preview immediately and are sent to
 the keyboard with `Ctrl+S`. In the `custom` mode click a key in the preview to
 select it and type its colour; `Ctrl+F` fills every key with the colour in the
 field. `--dry-run` and `--state` work as in the command line.
+
+![Breath effect with a green colour](docs/images/tui-breath.png)
+
+![Spectrum effect in full colour](docs/images/tui-spectrum.png)
+
+![Custom mode with the W, A, S, D keys set to red](docs/images/tui-custom.png)
 
 The animations are only a rough approximation of the effects: the firmware
 does not document them, and the preview layout is a guess at an ANSI TKL board.
