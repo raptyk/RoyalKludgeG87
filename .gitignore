@@ -1,0 +1,11 @@
+# Vendor driver: proprietary, kept locally for analysis only.
+original/
+# Personal device backups.
+backups/
+
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/

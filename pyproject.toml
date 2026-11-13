@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "g87ctl"
+version = "0.1.0"
+description = "Open source lighting control for the GamingForce Z / Royal Kludge G87 RGB keyboard"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = ["hidapi>=0.14"]
+
+[project.optional-dependencies]
+gui = ["textual>=1.0"]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "textual>=1.0"]
+
+[project.scripts]
+g87ctl = "g87ctl.cli:main"
+
+[tool.setuptools]
+packages = ["g87ctl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
