@@ -1,7 +1,10 @@
 # g87ctl
 
 Open source lighting control for the **GamingForce Z / Royal Kludge G87 RGB**
-keyboard, whose vendor tool was abandoned and misbehaves on Windows 11.
+keyboard, whose vendor tool was abandoned, Windows only and misbehaves on
+Windows 11. `g87ctl` is cross-platform: it is written in pure Python on top of
+[hidapi](https://pypi.org/project/hidapi/) and should run on Windows, Linux and
+macOS.
 
 The protocol was reconstructed from the vendor tool and is documented in
 [docs/PROTOCOL.md](docs/PROTOCOL.md).
@@ -19,7 +22,9 @@ The protocol was reconstructed from the vendor tool and is documented in
 | key remapping, macros, gaming mode | documented only |
 | GUI | planned |
 
-Tested on Windows 11 with firmware 1.01, USB `05AC:024F`.
+Tested on Windows 11 with firmware 1.01, USB `05AC:024F`. Linux and macOS are
+supported by design (nothing in the code is Windows specific) but not tested
+yet - reports are welcome.
 
 ## Safety
 
@@ -48,7 +53,22 @@ python -m pip install hidapi
 python -m g87ctl
 ```
 
-On Linux a udev rule granting access to device `05ac:024f` is needed.
+### Linux
+
+Access to the `hidraw` node needs a udev rule, otherwise the tool must run as
+root. Create `/etc/udev/rules.d/99-g87ctl.rules`:
+
+```
+KERNEL=="hidraw*", ATTRS{idVendor}=="05ac", ATTRS{idProduct}=="024f", TAG+="uaccess"
+```
+
+then run `sudo udevadm control --reload-rules && sudo udevadm trigger` and
+replug the keyboard.
+
+### macOS
+
+macOS may ask to grant the terminal "Input Monitoring" permission
+(System Settings > Privacy & Security) before the keyboard can be opened.
 
 ## Usage
 
