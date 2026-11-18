@@ -39,7 +39,7 @@ commands
   modes                list effects with stored settings (* = active)
   keys                 list key names for 'custom --key'
   apply                send the stored state again
-  gui                  full-screen editor with an animated keyboard preview (needs textual)
+  tui                  full-screen editor with an animated keyboard preview (needs textual)
   info                 show USB id and firmware version
   import-gkdb <file>   restore lighting from the vendor's GamingKeyboard.gkdb
   auth                 run the firmware check that guards every write
@@ -149,7 +149,7 @@ def _apply(state: LightingState, args: argparse.Namespace) -> None:
 
 
 def _send_state(state: LightingState, args: argparse.Namespace) -> str:
-    """Like _apply, but silent: returns a status line for the GUI."""
+    """Like _apply, but silent: returns a status line for the TUI."""
     if args.dry_run:
         build_lighting_block(state)  # validates the state
         return "dry run: nothing was sent"
@@ -158,12 +158,12 @@ def _send_state(state: LightingState, args: argparse.Namespace) -> str:
     return f"applied: {describe_active(state)}"
 
 
-def cmd_gui(args: argparse.Namespace) -> None:
+def cmd_tui(args: argparse.Namespace) -> None:
     try:
-        from .gui import run_gui
+        from .tui import run_tui
     except ImportError as exc:
-        raise ValueError(f"the gui needs the 'textual' package (pip install g87ctl[gui]): {exc}") from exc
-    run_gui(LightingState.load(args.state), lambda state: _send_state(state, args))
+        raise ValueError(f"the tui needs the 'textual' package (pip install g87ctl[tui]): {exc}") from exc
+    run_tui(LightingState.load(args.state), lambda state: _send_state(state, args))
 
 
 def describe_active(state: LightingState) -> str:
@@ -345,8 +345,8 @@ def build_parser() -> argparse.ArgumentParser:
     commands.add_parser("examples", help="show usage examples").set_defaults(handler=cmd_examples)
     commands.add_parser("apply", help="send the stored lighting state again").set_defaults(handler=cmd_apply)
     commands.add_parser(
-        "gui", help="full-screen editor with an animated keyboard preview (needs textual)"
-    ).set_defaults(handler=cmd_gui)
+        "tui", help="full-screen editor with an animated keyboard preview (needs textual)"
+    ).set_defaults(handler=cmd_tui)
 
     set_parser = commands.add_parser("set", help="select a built-in effect and optionally change it")
     set_parser.add_argument("mode", help="effect name or number (see 'modes')")

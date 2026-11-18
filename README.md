@@ -20,7 +20,7 @@ The protocol was reconstructed from the vendor tool and is documented in
 | import from the vendor tool's database (`.gkdb`) | works |
 | undocumented commands and hidden effect numbers | available under `experimental` |
 | key remapping, macros, gaming mode | documented only |
-| terminal UI (`g87ctl gui`) | works |
+| terminal UI (`g87ctl tui`) | works |
 
 Tested on Windows 11 with firmware 1.01, USB `05AC:024F`. Linux and macOS are
 supported by design (nothing in the code is Windows specific) but not tested
@@ -59,12 +59,12 @@ Run from the repository root (the folder with `pyproject.toml`):
 
 ```
 cd path\to\royalkludge
-pip install ".[gui]"
-g87ctl gui
+pip install ".[tui]"
+g87ctl tui
 ```
 
 If `g87ctl` is not recognized, Python's `Scripts` folder is not in `PATH`;
-use `python -m g87ctl gui` instead.
+use `python -m g87ctl tui` instead.
 
 ### Linux
 
@@ -74,8 +74,8 @@ On Ubuntu/Debian:
 sudo apt install python3-venv libhidapi-hidraw0
 cd path/to/royalkludge
 python3 -m venv .venv && source .venv/bin/activate
-pip install ".[gui]"
-g87ctl gui
+pip install ".[tui]"
+g87ctl tui
 ```
 
 Access to the `hidraw` node needs a udev rule, otherwise the tool must run as
@@ -116,8 +116,8 @@ g87ctl import-gkdb GamingKeyboard.gkdb    # restore settings from the vendor dat
 ### Terminal UI
 
 ```
-pip install .[gui]
-g87ctl gui
+pip install .[tui]
+g87ctl tui
 ```
 
 Opens a full-screen editor built on [Textual](https://textual.textualize.io/).

@@ -4,7 +4,7 @@ pytest.importorskip("textual")
 
 from textual.widgets import Input, OptionList
 
-from g87ctl.gui import G87App, KeyboardPreview, render_keyboard
+from g87ctl.tui import G87App, KeyboardPreview, render_keyboard
 from g87ctl.lighting import CUSTOM_MODE, LightingState
 from g87ctl.preview import KEYS, ROWS, frame
 

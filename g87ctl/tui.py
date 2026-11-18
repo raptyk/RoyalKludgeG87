@@ -253,6 +253,6 @@ class G87App(App[None]):
         self.call_from_thread(self._set_status, message)
 
 
-def run_gui(state: LightingState, send: SendState) -> None:
+def run_tui(state: LightingState, send: SendState) -> None:
     """Open the UI; 'send' writes a state to the keyboard and returns a status line."""
     G87App(state, send).run()
