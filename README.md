@@ -20,7 +20,7 @@ The protocol was reconstructed from the vendor tool and is documented in
 | import from the vendor tool's database (`.gkdb`) | works |
 | undocumented commands and hidden effect numbers | available under `experimental` |
 | key remapping, macros, gaming mode | documented only |
-| GUI | planned |
+| terminal UI (`g87ctl gui`) | works |
 
 Tested on Windows 11 with firmware 1.01, USB `05AC:024F`. Linux and macOS are
 supported by design (nothing in the code is Windows specific) but not tested
@@ -53,7 +53,30 @@ python -m pip install hidapi
 python -m g87ctl
 ```
 
+### Windows (PowerShell)
+
+Run from the repository root (the folder with `pyproject.toml`):
+
+```
+cd path\to\royalkludge
+pip install ".[gui]"
+g87ctl gui
+```
+
+If `g87ctl` is not recognized, Python's `Scripts` folder is not in `PATH`;
+use `python -m g87ctl gui` instead.
+
 ### Linux
+
+On Ubuntu/Debian:
+
+```
+sudo apt install python3-venv libhidapi-hidraw0
+cd path/to/royalkludge
+python3 -m venv .venv && source .venv/bin/activate
+pip install ".[gui]"
+g87ctl gui
+```
 
 Access to the `hidraw` node needs a udev rule, otherwise the tool must run as
 root. Create `/etc/udev/rules.d/99-g87ctl.rules`:
